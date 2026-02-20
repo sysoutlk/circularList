@@ -1,0 +1,33 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: circular-list
+
+    data:
+      redis:
+        host: localhost
+        port: 6379
+        database: 0
+        timeout: 5000ms
+        lettuce:
+          pool:
+            max-active: 20
+            max-idel: 10
+            min-idel: 5
+            max-wait: -1ms
+
+#\u5FAA\u73AF\u5217\u8868\u914D\u7F6E
+circular-list:
+  #\u5217\u8868\u524D\u7F00
+  list-prefix: "circular:list:"
+  #BRPOPLPUSH\u963B\u585E\u8D85\u65F6(\u79D2)
+  block-timeout: 5
+  #\u9ED8\u8BA4\u5217\u8868\u5927\u5C0F
+  default-size: 10
+
+logging:
+  level:
+    com.example.circularlist: debug
+    org.springframework.data.redis: debug
